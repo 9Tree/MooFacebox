@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	
+	<!-- CSS -->
+	<link rel="stylesheet" href="moofacebox-0.5/moofacebox.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	
+	
+	<!-- JAVASCRIPTS -->
+	<script src="mootools-1.2.4-core.js" type="text/javascript" charset="utf-8"></script>
+	<script src="mootools-1.2.4.4-more.js" type="text/javascript" charset="utf-8"></script>
+	<script src="moofacebox-0.5/moofacebox.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script type="text/javascript" charset="utf-8">
+		var myFacebox;
+		window.addEvent('domready', function() {
+			myFacebox = new mooFacebox({draggable:true});
+		});
+	</script>
+	
+	<title>MooFacebox test</title>
+	
+</head>
+<body>
+	<a href="#terms" rel="facebox" title="div #terms">simple load div #terms</a><br />
+	<a href="content.html" rel="facebox" title="file content.html">simple load content.html</a><br />
+	<br />
+	
+	<button onclick="myFacebox.open('#terms')">dynamic load div #terms</button><br />
+	<button onclick="myFacebox.open('content.html', {title:'testing 123'})">dynamic load contents.html</button><br />
+	
+	<div id="terms" style="display:none;">123 test</div>
+	
+</body>
+</html>
