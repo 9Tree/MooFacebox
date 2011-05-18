@@ -1,0 +1,27 @@
+* mooFacebox
+* version: 0.5 (18/05/2011)
+* @requires MooTools v1.3 or later
+*
+* Licensed under the MIT:
+*
+*   http://www.opensource.org/licenses/mit-license.php
+*
+* Original Facebox (http://famspam.com/facebox) - Copyright since 2007 by Chris Wanstrath [ chris@ozmm.org ]
+* Original port (http://code.google.com/p/moofacebox/) - Copyright since 2008 by Augusto Becciu [ augusto@becciu.org ]
+* This version (https://github.com/carlosouro/MooFacebox) - Copyright since 2011 by Carlos Ouro [ carlos.ouro@9tree.net ]
+*
+* Usage:
+*  
+*  window.addEvent('domready', function() {
+*      var myFacebox = new mooFacebox();
+*  });
+*
+*
+*  <a href="#terms" rel="facebox">Terms</a>
+*    Loads the #terms div in the box
+*
+*  <a href="terms.html" rel="facebox">Terms</a>
+*    Loads the terms.html page in the box
+*
+*  <a href="terms.png" rel="facebox">Terms</a>
+*    Loads the terms.png image in the box
