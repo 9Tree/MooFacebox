@@ -41,7 +41,7 @@ var mooFacebox = new Class({
 		default_opts  : {title:'', klass:false, close:true, data:{}, evalScripts:true},
         facebox_html  : '\
     <div class="popup"> \
-      <table> \
+      <table class="drag_container"> \
         <tbody> \
           <tr> \
             <td class="tl"/><td class="b"/><td class="tr"/> \
@@ -91,10 +91,17 @@ var mooFacebox = new Class({
 
         $(document).addEvent('keydown', this.keydownHdlr);
 
-        this.fadeIn(this.faceboxEl);
+        this.fadeIn(this.faceboxEl, function(){
+			if (this.options.draggable == true) {
+	            var dcontentEl = this.faceboxEl.getElement('.title');
+	            this.drag=this.faceboxEl.getElement('.drag_container').makeDraggable({handle: dcontentEl});
+
+	            dcontentEl.setStyle('cursor', 'move');
+	        }
+		}.bind(this));
     },
 	
-	// 9Tree: can_close option added (not implemented for rel atributtes)
+	// 9Tree: close option added (not implemented for rel atributtes)
     reveal: function(data, klass, close) {
 		this.faceboxEl.getElement('.footer').setStyle('display', (close ? '' : 'none'));
 		
@@ -108,31 +115,33 @@ var mooFacebox = new Class({
         this.faceboxEl.getElement('.loading').destroy();
         var childs = this.faceboxEl.getElement('.body').getChildren();
 		this.fadeIn(childs[0]);
-		//if(can_close) this.fadeIn(childs[1]);
     },
 
-    fadeIn: function(el) {
+    fadeIn: function(el, onComplete) {
         el.set('tween', {
             onStart: function() {
                 el.setStyle('display', 'block');
-            }
+            },
+			onComplete: (onComplete?onComplete:function() {})
         });
-        el.fade('in');
+        return el.fade('in');
     },
 
-    fadeOut: function(el) {
+    fadeOut: function(el, onComplete) {
         el.set('tween', {
-            onComplete: function() {
+            onComplete: (onComplete?onComplete:function() {
                 el.setStyle('display', 'none');
-            }
+            })
         });
-        el.fade('out');
+        return el.fade('out');
     },
 
     close: function() {
         $(document).removeEvent('keydown', this.keydownHdlr);
-
-        this.fadeOut(this.faceboxEl);
+		this.drag.stop();
+        this.fadeOut(this.faceboxEl, function(){
+			this.faceboxEl.getElement('.drag_container').setStyles({position:'relative',left:0,top:0});
+		}.bind(this));
         var contentEl = this.faceboxEl.getElement('.content');
         contentEl.set('class', '');
         contentEl.addClass('content');
@@ -165,12 +174,6 @@ var mooFacebox = new Class({
         });
 
         this.faceboxEl.getElement('.close').addEvent('click', this.close.bind(this));
-
-        if (this.options.draggable == true) {
-            var dcontentEl = this.faceboxEl.getElement('.title');
-            this.drag = this.faceboxEl.makeDraggable({handle: dcontentEl});
-            dcontentEl.setStyle('cursor', 'move');
-        }
 		
 		// 9Tree: set e.stop() only when e.code == 27
 		// this allows you to write within facebox and still keeps the key event
@@ -244,8 +247,9 @@ var mooFacebox = new Class({
 	            method: 'post',
 	            onSuccess: function(responseText, responseXML) {
 	                this.reveal(responseText, opts.klass, opts.close);
-	            }.bind(this)
-	        }).post(opts.data);
+	            }.bind(this),
+				data:opts.data
+	        }).post();
         }
 	},
 
