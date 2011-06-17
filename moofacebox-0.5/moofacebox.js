@@ -248,15 +248,24 @@ var mooFacebox = new Class({
 
         // ajax
         } else {
-            new Request.HTML({
-				evalScripts: opts.evalScripts,
-	            url: url,
-	            method: 'post',
-	            onSuccess: function(responseText, responseXML) {
-	                this.reveal(responseText, opts.klass, opts.close);
-	            }.bind(this),
-				data:opts.data
-	        }).post();
+            if(!opts.evalScripts){
+				new Request({
+		            url: url,
+		            method: 'get',
+		            onSuccess: function(responseText, responseXML) {
+		                this.reveal(responseText, opts.klass, opts.close_button);
+		            }.bind(this)
+		        }).post(opts.data);
+			} else {
+				new Request.HTML({
+					evalScripts: true,
+		            url: url,
+		            method: 'post',
+		            onSuccess: function(responseText, responseXML) {
+		                this.reveal(responseText, opts.klass, opts.close_button);
+		            }.bind(this)
+		        }).post(opts.data);
+			}
         }
 	},
 
