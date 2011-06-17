@@ -253,7 +253,7 @@ var mooFacebox = new Class({
 		            url: url,
 		            method: 'get',
 		            onSuccess: function(responseText, responseXML) {
-		                this.reveal(responseText, opts.klass, opts.close_button);
+		                this.reveal(responseText, opts.klass, opts.close);
 		            }.bind(this)
 		        }).post(opts.data);
 			} else {
@@ -262,7 +262,7 @@ var mooFacebox = new Class({
 		            url: url,
 		            method: 'post',
 		            onSuccess: function(responseText, responseXML) {
-		                this.reveal(responseText, opts.klass, opts.close_button);
+		                this.reveal(responseText, opts.klass, opts.close);
 		            }.bind(this)
 		        }).post(opts.data);
 			}
