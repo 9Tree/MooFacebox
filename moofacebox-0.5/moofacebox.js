@@ -147,6 +147,7 @@ var mooFacebox = new Class({
 		this.drag.stop();
         this.fadeOut(this.faceboxEl, function(){
 			this.faceboxEl.getElement('.drag_container').setStyles({position:'relative',left:0,top:0});
+			this.faceboxEl.setStyle('display', 'none');
 		}.bind(this));
         var contentEl = this.faceboxEl.getElement('.content');
         contentEl.set('class', '');
