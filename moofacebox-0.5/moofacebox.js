@@ -73,7 +73,12 @@ var mooFacebox = new Class({
 
     loading: function() {
         if (this.faceboxEl.getElement('.loading')) return true;
-
+		
+		if(this.opened) {
+			//readjust position
+			this.faceboxEl.getElement('.drag_container').setStyles({position:'relative',left:0,top:0});
+		}
+		
         this.faceboxEl.getElement('.content').empty();
 
         var bodyEl = this.faceboxEl.getElement('.body');
@@ -90,8 +95,9 @@ var mooFacebox = new Class({
         });
 
         $(document).addEvent('keydown', this.keydownHdlr);
-
+		
         this.fadeIn(this.faceboxEl, function(){
+			this.opened = true;
 			if (this.options.draggable == true) {
 	            var dcontentEl = this.faceboxEl.getElement('.title');
 	            this.drag=this.faceboxEl.getElement('.drag_container').makeDraggable({handle: dcontentEl});
@@ -145,7 +151,7 @@ var mooFacebox = new Class({
         var contentEl = this.faceboxEl.getElement('.content');
         contentEl.set('class', '');
         contentEl.addClass('content');
-        return false;
+		this.opened=false;
     },
 
     setTitle: function(title) {
@@ -164,6 +170,7 @@ var mooFacebox = new Class({
         this.faceboxEl = new Element('div', {'id': 'facebox', 'style': 'display: none;'});
         this.faceboxEl.fade('hide');
         this.faceboxEl.set('html', this.options.facebox_html);
+		this.opened=false;
 
         $(document.body).adopt(this.faceboxEl);
 
