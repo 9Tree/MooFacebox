@@ -118,7 +118,7 @@ var mooFacebox = new Class({
         else
             this.faceboxEl.getElement('.content').adopt(data);
 
-        this.faceboxEl.getElement('.loading').destroy();
+        if(this.faceboxEl.getElement('.loading')) this.faceboxEl.getElement('.loading').destroy();
         var childs = this.faceboxEl.getElement('.body').getChildren();
 		this.fadeIn(childs[0]);
     },
@@ -252,11 +252,12 @@ var mooFacebox = new Class({
             if(!opts.evalScripts){
 				new Request({
 		            url: url,
-		            method: 'get',
+		            method: 'post',
 		            onSuccess: function(responseText, responseXML) {
 		                this.reveal(responseText, opts.klass, opts.close);
-		            }.bind(this)
-		        }).post(opts.data);
+		            }.bind(this),
+					data:opts.data
+		        }).send();
 			} else {
 				new Request.HTML({
 					evalScripts: true,
@@ -264,8 +265,9 @@ var mooFacebox = new Class({
 		            method: 'post',
 		            onSuccess: function(responseText, responseXML) {
 		                this.reveal(responseText, opts.klass, opts.close);
-		            }.bind(this)
-		        }).post(opts.data);
+		            }.bind(this),
+					data:opts.data
+		        }).send();
 			}
         }
 	},
