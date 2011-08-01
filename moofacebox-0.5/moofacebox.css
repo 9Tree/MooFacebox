@@ -1,23 +1,45 @@
-#facebox .b {
-    background:url(images/b.png);
+#facebox .top{
+	background:url(images/bg_n.png);
+	height:40px;
+}
+
+#facebox .bottom {
+    background:url(images/bg_s.png);
+	height:33px;
+}
+
+#facebox .left {
+    background:url(images/bg_w.png);
+	width:33px;
+}
+
+#facebox .right {
+    background:url(images/bg_e.png);
+	width:33px;
 }
 
 #facebox .tl {
-	height:0 !important;
-    background:url(images/tl.png);
+	width:32px;
+	height:40px;
+    background:url(images/bg_nw.png) no-repeat;
 }
 
 #facebox .tr {
-    background:url(images/tr.png);
+	width:33px;
+	height:40px;
+    background:url(images/bg_ne.png) no-repeat;
 }
 
 #facebox .bl {
-	height:0 !important;
-    background:url(images/bl.png);
+	width:32px;
+	height:33px;
+    background:url(images/bg_sw.png) no-repeat;
 }
 
 #facebox .br {
-    background:url(images/br.png);
+	width:33px;
+	height:33px;
+    background:url(images/bg_se.png) no-repeat;
 }
 
 #facebox {
@@ -40,30 +62,28 @@
 
 #facebox .dialog-content {
     background:#FFFFFF none repeat scroll 0% 50%;
-    border-color:#555555;
-    border-style:solid;
-    border-width:0px 1px 1px;
+	border:1px #999 solid;
 }
 
 #facebox .dialog-content .body {
-    padding: 10px;
+    padding: 10px 20px;
     background: #fff;
 }
 
 #facebox .dialog-content .title {
-    background: #6D84B4 none repeat scroll 0%;
-    border: 1px solid #3B5998;
-    color: white;
-    font-size: 14px;
+    color: #111;
+    font-size: 21px;
     font-weight: bold;
     margin: 0px;
-	font-family: 'Lucida Grande', Helvetica, Verdana, Tahoma, Arial, "MS Trebuchet", sans-serif;
+	font-family: Helvetica, Verdana, Tahoma, Arial, "MS Trebuchet", sans-serif;
 	text-shadow: 0 0 0;
+	padding:15px 20px 15px 20px;
+	padding-bottom:10px;
+	border-bottom:1px #eee solid;
 }
 
 #facebox .dialog-content .title span {
     display: block;
-    padding: 4px 10px 5px;
 }
 
 #facebox .loading {

@@ -44,10 +44,10 @@ var mooFacebox = new Class({
       <table class="drag_container"> \
         <tbody> \
           <tr> \
-            <td class="tl"/><td class="b"/><td class="tr"/> \
+            <td class="tl"/><td class="top"/><td class="tr"/> \
           </tr> \
           <tr> \
-            <td class="b"/> \
+            <td class="left"/> \
             <td class="dialog-content"> \
               <h2 class="title"> \
                 <span></span> \
@@ -61,10 +61,10 @@ var mooFacebox = new Class({
 				<div style="clear:both"></div> \
               </div> \
             </td> \
-            <td class="b"/> \
+            <td class="right"/> \
           </tr> \
           <tr> \
-            <td class="bl"/><td class="b"/><td class="br"/> \
+            <td class="bl"/><td class="bottom"/><td class="br"/> \
           </tr> \
         </tbody> \
       </table> \
