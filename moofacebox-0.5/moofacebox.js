@@ -177,8 +177,17 @@ var mooFacebox = new Class({
 
         // preload images
 		var preload=new Array();
-        this.faceboxEl.getElements('.b:first, .bl, .br, .tl, .tr, .close, .loading').each(function(el) {
-            preload.push(new Asset.image(el.getStyle('background-image').replace(/url\((.+)\)/, '$1')));
+        this.faceboxEl.getElements('.b:first, .bl, .br, .tl, .tr, .close, .loading').each(function(el)
+        {
+                // Get the background-image, usually something like: url("http://.../lalala.jpg")
+                var image_url = el.getStyle('background-image');
+                // Remove the "url(" and ")" part so we have only the url (and possibly quotes): http://.../lalala.jpg
+                image_url = image_url.replace('url(', '').replace(')', '');
+                // Remove the quotes, some browsers add it there to make it completely standard.
+                // I'm using regex here to replace ALL the quotes but it would be the same as twice image_url.replace('"', '');
+                image_url = image_url.replace(/"/g, '');
+
+                preload.push(new Asset.image(image_url));
         });
 
         this.faceboxEl.getElement('.close').addEvent('click', this.close.bind(this));
