@@ -73,12 +73,8 @@ var mooFacebox = new Class({
 
     loading: function() {
         if (this.faceboxEl.getElement('.loading')) return true;
-		
-		if(this.opened) {
-			//readjust position
-			this.faceboxEl.getElement('.drag_container').setStyles({position:'relative',left:0,top:0});
-		}
-		
+
+	this.faceboxEl.getElement('.drag_container').setStyles({position:'relative',left:0,top:0});
         this.faceboxEl.getElement('.content').empty();
 
         var bodyEl = this.faceboxEl.getElement('.body');
